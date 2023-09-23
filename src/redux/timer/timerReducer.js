@@ -7,8 +7,8 @@ import {
 } from "./timerTypes";
 
 const initialState = {
-  mainTimer: 25,
-  breakTimer: 5,
+  mainTime: 25,
+  breakTime: 5,
   timer: 25,
   isBreak: false,
 };
@@ -16,9 +16,9 @@ const initialState = {
 export const timerReducer = (state = initialState, action) => {
   switch (action.type) {
     case UPDATE_MAIN_TIME:
-      return { ...state, mainTimer: action.time };
+      return { ...state, mainTime: action.time };
     case UPDATE_BREAK_TIME:
-      return { ...state, breakTimer: action.time };
+      return { ...state, breakTime: action.time };
     case DECREASE_TIMER:
       return { ...state, timer: state.timer - 1 };
     case TOGGLE_IS_BREAK:
