@@ -1,6 +1,8 @@
 import {
   CHANGE_TIMER,
   DECREASE_TIMER,
+  PAUSE_TIMER,
+  START_TIMER,
   TOGGLE_IS_BREAK,
   UPDATE_BREAK_TIME,
   UPDATE_MAIN_TIME,
@@ -11,6 +13,7 @@ const initialState = {
   breakTime: 5,
   timer: 25,
   isBreak: false,
+  interval: null,
 };
 
 export const timerReducer = (state = initialState, action) => {
@@ -25,6 +28,10 @@ export const timerReducer = (state = initialState, action) => {
       return { ...state, isBreak: !state.isBreak };
     case CHANGE_TIMER:
       return { ...state, timer: action.time };
+    case START_TIMER:
+      return { ...state, interval: action.interval };
+    case PAUSE_TIMER:
+      return { ...state, interval: null };
     default:
       return state;
   }

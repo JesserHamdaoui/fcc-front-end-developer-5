@@ -1,6 +1,8 @@
 import {
   CHANGE_TIMER,
   DECREASE_TIMER,
+  PAUSE_TIMER,
+  START_TIMER,
   TOGGLE_IS_BREAK,
   UPDATE_BREAK_TIME,
   UPDATE_MAIN_TIME,
@@ -36,5 +38,18 @@ export const changeTimer = (time) => {
   return {
     type: CHANGE_TIMER,
     time,
+  };
+};
+
+export const startTimer = (interval) => {
+  return {
+    type: START_TIMER,
+    interval,
+  };
+};
+
+export const pauseTimer = () => {
+  return {
+    type: PAUSE_TIMER,
   };
 };
