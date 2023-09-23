@@ -9,22 +9,27 @@ const BreakTime = () => {
   const dispatch = useDispatch();
 
   const handleDecrease = () => {
-    if (timerInterval || breakTime === 1) return;
-    dispatch(updateBreakTime(breakTime - 1));
-    if (isBreak) dispatch(changeTimer(breakTime - 1));
+    if (timerInterval || breakTime === 60) return;
+    dispatch(updateBreakTime(breakTime - 60));
+    if (isBreak) dispatch(changeTimer(breakTime - 60));
   };
 
   const handleIncrease = () => {
-    if (timerInterval) return;
-    dispatch(updateBreakTime(breakTime + 1));
-    if (isBreak) dispatch(changeTimer(breakTime + 1));
+    if (timerInterval || breakTime === 3600) return;
+    dispatch(updateBreakTime(breakTime + 60));
+    if (isBreak) dispatch(changeTimer(breakTime + 60));
   };
 
   return (
     <div id="break-time">
-      <button onClick={handleDecrease}>-</button>
-      <span> {breakTime} minute(s) </span>
-      <button onClick={handleIncrease}>+</button>
+      <span id="break-label">Break Length</span>
+      <button onClick={handleDecrease} id="break-decrement">
+        -
+      </button>
+      <span id="break-length">{Math.floor(breakTime / 60)}</span>
+      <button onClick={handleIncrease} id="break-increment">
+        +
+      </button>
     </div>
   );
 };

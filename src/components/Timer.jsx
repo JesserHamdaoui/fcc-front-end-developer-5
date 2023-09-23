@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeTimer,
@@ -6,6 +6,8 @@ import {
   pauseTimer,
   startTimer,
   toggleIsBreak,
+  updateBreakTime,
+  updateMainTime,
 } from "../redux/timer/timerActions";
 
 const Timer = () => {
@@ -28,35 +30,44 @@ const Timer = () => {
     }
   }, [timer]);
 
-  const handleStart = () => {
-    dispatch(
-      startTimer(
-        setInterval(() => {
-          dispatch(decreaseTimer());
-        }, 1000)
-      )
-    );
-  };
-
-  const handlePause = () => {
-    clearInterval(timerInterval);
-    dispatch(pauseTimer());
+  const handleClick = () => {
+    if (timerInterval) {
+      clearInterval(timerInterval);
+      dispatch(pauseTimer());
+    } else {
+      dispatch(
+        startTimer(
+          setInterval(() => {
+            dispatch(decreaseTimer());
+          }, 1000)
+        )
+      );
+    }
   };
 
   const handleReset = () => {
     clearInterval(timerInterval);
     dispatch(pauseTimer());
-    dispatch(changeTimer(mainTime));
+    dispatch(changeTimer(1500));
+    dispatch(updateMainTime(1500));
+    dispatch(updateBreakTime(300));
     if (isBreak) dispatch(toggleIsBreak());
   };
 
   return (
     <div id="timer">
-      <span>{isBreak ? "Break: " : "Session: "}</span>
-      <span>{timer} minute(s) left </span>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handlePause}>Pause</button>
-      <button onClick={handleReset}>Reset</button>
+      <span id="timer-label">{isBreak ? "Break" : "Session"}</span>
+      <span id="time-left">
+        {Math.floor(timer / 60) < 10 ? "0" : ""}
+        {Math.floor(timer / 60)}:{timer % 60 < 10 ? "0" : ""}
+        {timer % 60}
+      </span>
+      <button id="start_stop" onClick={handleClick}>
+        Start/Pause
+      </button>
+      <button id="reset" onClick={handleReset}>
+        reset
+      </button>
     </div>
   );
 };

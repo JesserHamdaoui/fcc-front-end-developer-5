@@ -9,22 +9,27 @@ const MainTime = () => {
   const dispatch = useDispatch();
 
   const handleDecrease = () => {
-    if (timerInterval || mainTime === 1) return;
-    dispatch(updateMainTime(mainTime - 1));
-    if (!isBreak) dispatch(changeTimer(mainTime - 1));
+    if (timerInterval || mainTime === 60) return;
+    dispatch(updateMainTime(mainTime - 60));
+    if (!isBreak) dispatch(changeTimer(mainTime - 60));
   };
 
   const handleIncrease = () => {
-    if (timerInterval) return;
-    dispatch(updateMainTime(mainTime + 1));
-    if (!isBreak) dispatch(changeTimer(mainTime + 1));
+    if (timerInterval || mainTime === 3600) return;
+    dispatch(updateMainTime(mainTime + 60));
+    if (!isBreak) dispatch(changeTimer(mainTime + 60));
   };
 
   return (
     <div>
-      <button onClick={handleDecrease}>-</button>
-      <span> {mainTime} minute(s) </span>
-      <button onClick={handleIncrease}>+</button>
+      <span id="session-label">Session Length</span>
+      <button onClick={handleDecrease} id="session-decrement">
+        -
+      </button>
+      <span id="session-length">{Math.floor(mainTime / 60)}</span>
+      <button onClick={handleIncrease} id="session-increment">
+        +
+      </button>
     </div>
   );
 };

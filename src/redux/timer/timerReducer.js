@@ -9,9 +9,9 @@ import {
 } from "./timerTypes";
 
 const initialState = {
-  mainTime: 25,
-  breakTime: 5,
-  timer: 25,
+  mainTime: 1500,
+  breakTime: 300,
+  timer: 1500,
   isBreak: false,
   interval: null,
 };
