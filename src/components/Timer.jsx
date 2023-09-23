@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   changeTimer,
@@ -9,6 +9,7 @@ import {
   updateBreakTime,
   updateMainTime,
 } from "../redux/timer/timerActions";
+import audioSrc from "../assets/alarm.mp3";
 
 const Timer = () => {
   const timer = useSelector((state) => state.timer);
@@ -18,15 +19,17 @@ const Timer = () => {
   const timerInterval = useSelector((state) => state.interval);
   const dispatch = useDispatch();
 
+  const audioRef = useRef();
+
   useEffect(() => {
-    if (timer === 0) {
+    if (timer < 0) {
       if (isBreak) {
         dispatch(changeTimer(mainTime));
-        dispatch(toggleIsBreak());
       } else {
         dispatch(changeTimer(breakTime));
-        dispatch(toggleIsBreak());
       }
+      audioRef.current.play();
+      dispatch(toggleIsBreak());
     }
   }, [timer]);
 
@@ -51,6 +54,8 @@ const Timer = () => {
     dispatch(changeTimer(1500));
     dispatch(updateMainTime(1500));
     dispatch(updateBreakTime(300));
+    audioRef.current.pause();
+    audioRef.current.currentTime = 0;
     if (isBreak) dispatch(toggleIsBreak());
   };
 
@@ -68,6 +73,7 @@ const Timer = () => {
       <button id="reset" onClick={handleReset}>
         reset
       </button>
+      <audio id="beep" src={audioSrc} ref={audioRef} type="audio/mp3" />
     </div>
   );
 };
