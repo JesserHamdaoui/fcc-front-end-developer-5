@@ -5,7 +5,7 @@ import { store } from "./redux/store";
 
 const App = () => {
   return (
-    <div id="app">
+    <div id="app" className="flex justify-center items-center h-screen">
       <Provider store={store}>
         <TimerContainer />
       </Provider>

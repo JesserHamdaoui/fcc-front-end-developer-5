@@ -21,15 +21,27 @@ const MainTime = () => {
   };
 
   return (
-    <div>
-      <span id="session-label">Session Length</span>
-      <button onClick={handleDecrease} id="session-decrement">
-        -
-      </button>
-      <span id="session-length">{Math.floor(mainTime / 60)}</span>
-      <button onClick={handleIncrease} id="session-increment">
-        +
-      </button>
+    <div id="session-time" className="flex flex-col items-center gap-2">
+      <span id="session-label" className="font-bold">
+        Session Length
+      </span>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleDecrease}
+          id="session-decrement"
+          className="w-7 h-7 flex justify-center items-center font-bold bg-slate-300 rounded-lg"
+        >
+          -
+        </button>
+        <span id="session-length">{Math.floor(mainTime / 60)}</span>
+        <button
+          onClick={handleIncrease}
+          id="session-increment"
+          className="w-7 h-7 flex justify-center items-center font-semibold bg-slate-300 rounded-lg"
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 };

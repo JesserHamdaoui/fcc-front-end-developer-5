@@ -21,15 +21,27 @@ const BreakTime = () => {
   };
 
   return (
-    <div id="break-time">
-      <span id="break-label">Break Length</span>
-      <button onClick={handleDecrease} id="break-decrement">
-        -
-      </button>
-      <span id="break-length">{Math.floor(breakTime / 60)}</span>
-      <button onClick={handleIncrease} id="break-increment">
-        +
-      </button>
+    <div id="break-time" className="flex flex-col items-center gap-2">
+      <h2 id="break-label" className="font-bold">
+        Break Length
+      </h2>
+      <div className="flex items-center gap-3">
+        <button
+          onClick={handleDecrease}
+          id="break-decrement"
+          className="w-7 h-7 flex justify-center items-center font-bold bg-slate-300 rounded-lg"
+        >
+          -
+        </button>
+        <span id="break-length">{Math.floor(breakTime / 60)}</span>
+        <button
+          onClick={handleIncrease}
+          id="break-increment"
+          className="w-7 h-7 flex justify-center items-center font-semibold bg-slate-300 rounded-lg"
+        >
+          +
+        </button>
+      </div>
     </div>
   );
 };

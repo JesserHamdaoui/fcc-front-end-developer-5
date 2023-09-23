@@ -60,17 +60,27 @@ const Timer = () => {
   };
 
   return (
-    <div id="timer">
-      <span id="timer-label">{isBreak ? "Break" : "Session"}</span>
-      <span id="time-left">
+    <div id="timer" className="flex flex-col justify-center items-center gap-3">
+      <span id="timer-label" className="font-bold">
+        {isBreak ? "Break" : "Session"}
+      </span>
+      <span id="time-left" className="text-4xl">
         {Math.floor(timer / 60) < 10 ? "0" : ""}
         {Math.floor(timer / 60)}:{timer % 60 < 10 ? "0" : ""}
         {timer % 60}
       </span>
-      <button id="start_stop" onClick={handleClick}>
+      <button
+        id="start_stop"
+        onClick={handleClick}
+        className="bg-slate-300 px-3 rounded-xl"
+      >
         Start/Pause
       </button>
-      <button id="reset" onClick={handleReset}>
+      <button
+        id="reset"
+        onClick={handleReset}
+        className="bg-slate-300 px-3 rounded-xl"
+      >
         reset
       </button>
       <audio id="beep" src={audioSrc} ref={audioRef} type="audio/mp3" />
